@@ -5,7 +5,7 @@ import validationSchema from './validations';
 
 function Signup() {
 
-    const { handleSubmit, handleChange, values } = useFormik({
+    const { handleSubmit, handleChange, handleBlur, values, errors, touched } = useFormik({ // handleblur ve touched ile bir formdan ayrılıp ayrılmadığımıza bakıyor
         initialValues: {
           email: '',
           password: '',
@@ -22,19 +22,25 @@ function Signup() {
             <form onSubmit={handleSubmit}>
 
                 <label>Email</label>
-                <input name="email" value={values.email} onChange={handleChange} />
+                <input name="email" value={values.email} onChange={handleChange} onBlur={handleBlur}/>
+
+               { errors.email && touched.email && <div className='error'>{errors.email}</div> }  {/* Eğer bir hata varsa form içinde bu kod ile hatayı gösterir.*/}
 
                 <br />
                 <br />
 
                 <label>Password</label>
-                <input name="password" value={values.password} onChange={handleChange} />
+                <input name="password" value={values.password} onChange={handleChange} onBlur={handleBlur} />
+
+                { errors.password && touched.password && <div className='error'>{errors.password}</div> }  {/* Eğer bir hata varsa form içinde bu kod ile hatayı gösterir.*/}
 
                 <br />
                 <br />
 
                 <label >Confirm Password</label>
-                <input name="passwordConfirm" value={values.passwordConfirm} onChange={handleChange} />
+                <input name="passwordConfirm" value={values.passwordConfirm} onChange={handleChange} onBlur={handleBlur}/>
+
+                { errors.passwordConfirm && touched.passwordConfirm && <div className='error'>{errors.passwordConfirm}</div> }  {/* Eğer bir hata varsa form içinde bu kod ile hatayı gösterir.*/}
 
                 <br />
                 <br />
