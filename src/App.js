@@ -1,25 +1,25 @@
 import './App.css';
-import { Formik } from 'formik';
+import { useFormik } from 'formik';
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Sign Up</h1>
-      <Formik
-        initialValues={{
-          firstName: 'Emre',
+
+  const { handleSubmit, handleChange, values } = useFormik({
+    initialValues: {
+      firstName: 'Emre',
           lastName: 'Saglam',
           email: 'emresaglam4207@gmail.com',
           gender: 'male',
           hobies: [], //birden fazla checkbox seçilebildiği için array olacaktır tipi
           country: "Turkey",
+    },
+    onSubmit: values => {
+      console.log(values);
+    },
+  });
 
-        }}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
-      >
-        {({ handleSubmit, handleChange, values }) => (
+  return (
+    <div className="App">
+      <h1>Sign Up</h1>
           <form onSubmit={handleSubmit}>
             <label htmlFor="firstName">First Name</label>
             <input name="firstName" onChange={handleChange} value={values.firstName} placeholder="Jane" />
@@ -83,8 +83,6 @@ function App() {
             {JSON.stringify(values)}
 
           </form>
-        )}
-      </Formik>
     </div>
   );
 }
